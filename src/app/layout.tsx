@@ -1,5 +1,18 @@
 import type { Metadata } from "next";
+import { Jost, Lora } from "next/font/google";
 import "./globals.css";
+
+const jost = Jost({
+    subsets: ["latin"],
+    variable: "--font-jost",
+    display: "swap",
+});
+
+const lora = Lora({
+    subsets: ["latin"],
+    variable: "--font-lora",
+    display: "swap",
+});
 
 export const metadata: Metadata = {
     title: "Nai — Velas artesanales",
@@ -12,8 +25,8 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="es">
-            <body>{children}</body>
+        <html lang="es" className={`${jost.variable} ${lora.variable}`}>
+            <body className="font-display">{children}</body>
         </html>
     );
 }
