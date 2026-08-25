@@ -1,8 +1,12 @@
+import Navbar from "@/components/layout/Navbar";
+import Hero from "@/components/sections/Hero";
+
 export default function Home() {
     return (
-        <main className="p-8">
-            <h1 className="text-9xl">nai</h1>
-            <p className="font-body text-2xl" >Velas Artesanales</p>
+        <main>
+            <Navbar />
+            <Hero />
+            <Hero />
         </main>
     );
 }

@@ -14,8 +14,3 @@
   --color-muted: #8a8779;
   --color-ink: #2b2a26;
 }
-
-body {
-  background-color: var(--color-bg);
-  color: var(--color-ink);
-}
