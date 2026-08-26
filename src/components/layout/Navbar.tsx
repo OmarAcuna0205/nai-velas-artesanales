@@ -63,6 +63,7 @@ export default function Navbar() {
                             alt="Nai — Velas artesanales"
                             width={140}
                             height={68}
+                            loading="eager"
                         />
                     </a>
                 </div>

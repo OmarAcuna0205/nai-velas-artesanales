@@ -1,8 +1,30 @@
 "use client";
 
-import Image from "next/image";
+import { getImageProps } from "next/image";
 import { motion, type Variants } from "motion/react";
 import heroImage from "../../../public/hero.png";
+import heroMobileImage from "../../../public/hero-movil.png";
+
+const commonImageProps = {
+    alt: "Velas artesanales Nai",
+    fill: true,
+    sizes: "100vw",
+    loading: "eager" as const,
+    fetchPriority: "high" as const,
+    draggable: false,
+};
+
+const {
+    props: { srcSet: desktopSrcSet },
+} = getImageProps({
+    ...commonImageProps,
+    src: heroImage,
+});
+
+const { props: mobileImageProps } = getImageProps({
+    ...commonImageProps,
+    src: heroMobileImage,
+});
 
 const container: Variants = {
     hidden: {},
@@ -29,20 +51,20 @@ export default function Hero() {
                 initial={{ opacity: 0, scale: 1.05 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1.5, ease: [0.25, 1, 0.35, 1] }}
-                className="relative h-[50svh] min-h-80 w-full overflow-hidden will-change-transform lg:absolute lg:inset-0 lg:h-auto lg:min-h-0"
+                className="relative h-[55svh] min-h-96 w-full overflow-hidden will-change-transform lg:absolute lg:inset-0 lg:h-auto lg:min-h-0"
             >
-                <Image
-                    src={heroImage}
-                    alt="Velas artesanales Nai"
-                    fill
-                    preload
-                    sizes="100vw"
-                    draggable={false}
-                    className="pointer-events-none select-none object-cover object-[68%_center] sm:object-center"
-                />
+                <picture>
+                    <source media="(min-width: 1024px)" srcSet={desktopSrcSet} />
+                    {/* getImageProps mantiene la optimización al usar art direction. */}
+                    <img
+                        {...mobileImageProps}
+                        alt="Velas artesanales Nai"
+                        className="pointer-events-none select-none object-cover object-[center_35%] lg:object-center"
+                    />
+                </picture>
                 <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-bg via-bg/60 to-transparent lg:hidden"
+                    className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-bg via-bg/60 via-40% to-transparent to-85% lg:hidden"
                 />
             </motion.div>
 
@@ -53,7 +75,7 @@ export default function Hero() {
                     variants={container}
                     initial="hidden"
                     animate="show"
-                    className="mx-auto flex w-full max-w-7xl justify-center px-6 py-10 text-center lg:h-full lg:items-center lg:justify-start lg:px-10 lg:pt-28 lg:text-left"
+                    className="mx-auto flex w-full max-w-7xl justify-center px-6 pt-6 pb-10 text-center lg:h-full lg:items-center lg:justify-start lg:px-10 lg:pt-28 lg:text-left"
                 >
                     <div className="w-full max-w-xl">
                         <motion.h1 variants={item}>
