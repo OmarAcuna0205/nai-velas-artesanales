@@ -16,7 +16,7 @@ export default function Hero() {
                 initial={{ opacity: 0, scale: 1.05 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 2, ease: [0.25, 1, 0.35, 1] }}
-                className="relative h-120 w-full overflow-hidden will-change-transform lg:absolute lg:inset-0 lg:h-auto lg:min-h-0"
+                className="relative h-115 w-full overflow-hidden will-change-transform lg:absolute lg:inset-0 lg:h-auto lg:min-h-0"
             >
                 <Image
                     src={heroMobileImage}
@@ -38,7 +38,7 @@ export default function Hero() {
                 />
                 <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 bg-linear-to-t from-bg/95 via-bg/25 via-15% to-transparent to-50% lg:hidden"
+                    className="pointer-events-none absolute inset-0 bg-linear-to-t from-bg/95 via-bg/25 via-20% to-transparent to-55% lg:hidden"
                 />
             </motion.div>
 
