@@ -38,7 +38,7 @@ export default function Hero() {
                 />
                 <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 bg-linear-to-t from-bg/95 via-bg/25 via-20% to-transparent to-55% lg:hidden"
+                    className="pointer-events-none absolute inset-0 bg-linear-to-t from-bg/99  via-bg/10 via-10% to-transparent to-5% lg:hidden"
                 />
             </motion.div>
 
