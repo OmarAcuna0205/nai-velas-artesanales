@@ -59,12 +59,12 @@ export default function Hero() {
                     <img
                         {...mobileImageProps}
                         alt="Velas artesanales Nai"
-                        className="pointer-events-none select-none object-cover object-[center_35%] lg:object-center"
+                        className="pointer-events-none -translate-x-2 scale-[1.05] select-none object-cover object-[center_40%] lg:translate-x-0 lg:scale-100 lg:object-center"
                     />
                 </picture>
                 <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-bg via-bg/60 via-40% to-transparent to-85% lg:hidden"
+                    className="pointer-events-none absolute inset-0 bg-linear-to-t from-bg/99 via-bg/30 via-15% to-transparent to-58% lg:hidden"
                 />
             </motion.div>
 
