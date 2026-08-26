@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { ListIcon, XIcon, HandbagIcon } from "@phosphor-icons/react";
+import { ListIcon, XIcon, ShoppingCartIcon } from "@phosphor-icons/react";
 
 const links = [
     { label: "Inicio", href: "#inicio" },
@@ -15,7 +15,6 @@ const links = [
 export default function Navbar() {
     const [open, setOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
-    const cartCount = 0;
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 40);
@@ -25,8 +24,10 @@ export default function Navbar() {
 
     return (
         <header
-            className={`fixed top-0 z-50 w-full transition-colors duration-300 ${scrolled ? "border-b border-border bg-bg" : "bg-transparent"}`}>
-            <nav className="grid grid-cols-3 items-center px-5 py-5 md:px-10">
+            className={`fixed top-0 z-50 w-full transition-colors duration-300 ${scrolled ? "border-b border-border bg-bg" : "bg-transparent"
+                }`}
+        >
+            <nav className="grid grid-cols-3 items-center px-5 md:py-5 md:px-10">
                 <div className="flex items-center">
                     <button
                         onClick={() => setOpen(!open)}
@@ -40,12 +41,12 @@ export default function Navbar() {
                         )}
                     </button>
 
-                    <ul className="hidden gap-6 font-semibold md:flex">
+                    <ul className="hidden gap-5 font-semibold md:flex">
                         {links.map((link) => (
                             <li key={link.href}>
                                 <a
                                     href={link.href}
-                                    className="text-ink transition-colors hover:text-accent"
+                                    className="text-ink hover:text-accent"
                                 >
                                     {link.label}
                                 </a>
@@ -57,21 +58,20 @@ export default function Navbar() {
                 <div className="flex justify-center">
                     <a href="#inicio">
                         <Image
-                            className="hover:-translate-y-1 duration-100 transition-all"
+                            className="transition-all duration-100 hover:-translate-y-1"
                             src="/logo.png"
                             alt="Nai — Velas artesanales"
                             width={140}
                             height={68}
-                            priority
                         />
                     </a>
                 </div>
 
                 <div className="flex items-center justify-end gap-4 text-sm">
-                    <span className="text-ink font-semibold hidden md:inline">
-                        Carrito</span>
-                    <HandbagIcon size={30} weight="regular" />
-                    <span className="text-accent font-semibold hidden md:inline">{cartCount}</span>
+                    <ShoppingCartIcon
+                        size={30}
+                        className="cursor-pointer hover:text-accent"
+                    />
                 </div>
             </nav>
         </header>
