@@ -38,7 +38,7 @@ export default function Hero() {
                 />
                 <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 bg-linear-to-t from-bg from-4% via-[rgba(250,249,245,0.45)] via-18% to-[rgba(250,249,245,0)] to-45% lg:hidden"
+                    className="pointer-events-none absolute inset-0 bg-linear-to-t from-bg from-4% via-[rgba(250,249,245,0.45)] via-10% to-[rgba(250,249,245,0)] to-45% lg:hidden"
                 />
             </motion.div>
 
@@ -57,7 +57,7 @@ export default function Hero() {
                 >
                     <div className="w-full max-w-xl">
                         <h1>
-                            <span className="block font-display text-5xl leading-[1.1] tracking-tight text-ink lg:text-7xl">
+                            <span className="block font-display text-5xl tracking-tight text-ink lg:text-7xl">
                                 Hechas <span className="text-brand">100%</span>
                                 <br />
                                 a mano
