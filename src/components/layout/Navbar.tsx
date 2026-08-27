@@ -52,6 +52,7 @@ export default function Navbar() {
     const cartBtnRef = useRef<HTMLButtonElement>(null);
 
     const panel = menuOpen ? "menu" : cartOpen ? "cart" : null;
+    const restoreFocus = useRef(false);
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 40);
@@ -77,6 +78,7 @@ export default function Navbar() {
 
         const onKeyDown = (e: KeyboardEvent) => {
             if (e.key === "Escape") {
+                restoreFocus.current = true;
                 closeMenu();
                 closeCart();
                 return;
@@ -111,7 +113,10 @@ export default function Navbar() {
             document.removeEventListener("keydown", onKeyDown);
             body.style.overflow = prevOverflow;
             body.style.paddingRight = prevPadding;
-            trigger?.focus();
+            if (restoreFocus.current) {
+                restoreFocus.current = false;
+                trigger?.focus();
+            }
         };
     }, [panel]);
 
@@ -131,7 +136,7 @@ export default function Navbar() {
                         aria-label="Abrir menú"
                         aria-expanded={menuOpen}
                         aria-controls="menu-movil"
-                        className="cursor-pointer md:hidden"
+                        className="cursor-pointer md:hidden focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
                     >
                         <ListIcon size={30} weight="light" />
                     </button>
@@ -176,7 +181,7 @@ export default function Navbar() {
                         aria-label="Abrir carrito"
                         aria-expanded={cartOpen}
                         aria-controls="carrito"
-                        className="cursor-pointer transition-colors hover:text-accent"
+                        className="cursor-pointer transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
                     >
                         <ShoppingCartIcon size={30} weight="light" />
                     </button>
@@ -205,7 +210,7 @@ export default function Navbar() {
                 <button
                     onClick={closeMenu}
                     aria-label="Cerrar menú"
-                    className="absolute top-6 right-6 cursor-pointer"
+                    className="absolute top-6 right-6 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
                 >
                     <XIcon size={26} weight="light" />
                 </button>
@@ -262,7 +267,7 @@ export default function Navbar() {
                     <button
                         onClick={closeCart}
                         aria-label="Cerrar carrito"
-                        className="cursor-pointer transition-colors hover:text-accent"
+                        className="cursor-pointer transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
                     >
                         <XIcon size={26} weight="light" />
                     </button>
