@@ -15,8 +15,8 @@ export default function Hero() {
             <motion.div
                 initial={{ opacity: 0, scale: 1.05 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 2, ease: [0.25, 1, 0.35, 1] }}
-                className="relative h-115 w-full overflow-hidden will-change-transform lg:absolute lg:inset-0 lg:h-auto lg:min-h-0"
+                transition={{ duration: 2.8, ease: [0.25, 1, 0.35, 1] }}
+                className="relative h-110 w-full overflow-hidden will-change-transform lg:absolute lg:inset-0 lg:h-auto lg:min-h-0"
             >
                 <Image
                     src={heroMobileImage}
@@ -38,7 +38,7 @@ export default function Hero() {
                 />
                 <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 bg-linear-to-t from-bg via-bg/15 via-15% to-transparent to-100% lg:hidden"
+                    className="pointer-events-none absolute inset-0 bg-linear-to-t from-bg from-4% via-[rgba(250,249,245,0.45)] via-18% to-[rgba(250,249,245,0)] to-45% lg:hidden"
                 />
             </motion.div>
 
@@ -49,11 +49,11 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 25 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
-                        duration: 2,
-                        delay: 0.5,
+                        duration: 1.6,
+                        delay: 0.75,
                         ease: [0.25, 1, 0.35, 1],
                     }}
-                    className="mx-auto flex w-full max-w-7xl justify-center px-6 pt-4 pb-10 text-center lg:h-full lg:items-center lg:justify-start lg:px-10 lg:pt-28 lg:text-left"
+                    className="flex w-full justify-center px-6 pt-4 pb-10 text-center will-change-transform lg:h-full lg:items-center lg:justify-start lg:px-10 lg:pt-28 lg:text-left xl:px-16 2xl:px-24"
                 >
                     <div className="w-full max-w-xl">
                         <h1>
@@ -64,7 +64,7 @@ export default function Hero() {
                             </span>
                         </h1>
 
-                        <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-muted lg:mx-0 lg:mt-7 lg:text-lg">
+                        <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-muted lg:mx-0 lg:mt-7 lg:text-lg">
                             Elaboradas con materiales naturales:
                             <br />
                             Como cera de soya y cera de abeja.
