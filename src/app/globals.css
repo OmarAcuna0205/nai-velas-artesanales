@@ -16,5 +16,5 @@
 }
 
 html {
-  scroll-padding-top: 5rem;
+  -webkit-tap-highlight-color: transparent;
 }

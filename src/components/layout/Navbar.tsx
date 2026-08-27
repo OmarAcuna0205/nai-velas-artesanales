@@ -73,7 +73,7 @@ export default function Navbar() {
                 'a[href], button:not([disabled])',
             );
 
-        focusables()[0]?.focus();
+        node.focus();
 
         const onKeyDown = (e: KeyboardEvent) => {
             if (e.key === "Escape") {
@@ -194,11 +194,12 @@ export default function Navbar() {
             <div
                 ref={menuRef}
                 id="menu-movil"
+                tabIndex={-1}
                 role="dialog"
                 aria-modal="true"
                 aria-label="Menú"
                 inert={!menuOpen}
-                className={`fixed top-0 bottom-0 left-0 z-50 flex w-64 flex-col border-r border-border bg-bg px-8 py-20 transition-transform duration-500 ease-in-out md:hidden ${menuOpen ? "translate-x-0" : "-translate-x-full"
+                className={`fixed top-0 bottom-0 left-0 z-50 flex w-64 flex-col border-r border-border bg-bg px-8 py-20 outline-none transition-transform duration-500 ease-in-out md:hidden ${menuOpen ? "translate-x-0" : "-translate-x-full"
                     }`}
             >
                 <button
@@ -232,11 +233,12 @@ export default function Navbar() {
             <div
                 ref={cartRef}
                 id="carrito"
+                tabIndex={-1}
                 role="dialog"
                 aria-modal="true"
                 aria-label="Carrito"
                 inert={!cartOpen}
-                className={`fixed top-0 right-0 bottom-0 z-50 flex w-80 flex-col border-l border-border bg-bg transition-transform duration-500 ease-in-out ${cartOpen ? "translate-x-0" : "translate-x-full"
+                className={`fixed top-0 right-0 bottom-0 z-50 flex w-80 flex-col border-l border-border bg-bg outline-none transition-transform duration-500 ease-in-out ${cartOpen ? "translate-x-0" : "translate-x-full"
                     }`}
             >
                 <div className="flex items-center justify-between border-b border-border px-6 py-5">
