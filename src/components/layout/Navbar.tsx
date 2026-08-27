@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, type Variants } from "motion/react";
 import { ListIcon, XIcon, ShoppingCartIcon } from "@phosphor-icons/react";
@@ -46,20 +46,87 @@ export default function Navbar() {
     };
     const closeCart = () => setCartOpen(false);
 
+    const menuRef = useRef<HTMLDivElement>(null);
+    const cartRef = useRef<HTMLDivElement>(null);
+    const menuBtnRef = useRef<HTMLButtonElement>(null);
+    const cartBtnRef = useRef<HTMLButtonElement>(null);
+
+    const panel = menuOpen ? "menu" : cartOpen ? "cart" : null;
+
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 40);
+        onScroll();
         window.addEventListener("scroll", onScroll);
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
+
+    useEffect(() => {
+        if (!panel) return;
+
+        const node = panel === "menu" ? menuRef.current : cartRef.current;
+        const trigger =
+            panel === "menu" ? menuBtnRef.current : cartBtnRef.current;
+        if (!node) return;
+
+        const focusables = () =>
+            node.querySelectorAll<HTMLElement>(
+                'a[href], button:not([disabled])',
+            );
+
+        focusables()[0]?.focus();
+
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") {
+                closeMenu();
+                closeCart();
+                return;
+            }
+            if (e.key !== "Tab") return;
+
+            const items = focusables();
+            if (items.length === 0) return;
+
+            const first = items[0];
+            const last = items[items.length - 1];
+
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        };
+
+        const { body } = document;
+        const prevOverflow = body.style.overflow;
+        const prevPadding = body.style.paddingRight;
+        const gap = window.innerWidth - document.documentElement.clientWidth;
+        body.style.overflow = "hidden";
+        if (gap > 0) body.style.paddingRight = `${gap}px`;
+
+        document.addEventListener("keydown", onKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", onKeyDown);
+            body.style.overflow = prevOverflow;
+            body.style.paddingRight = prevPadding;
+            trigger?.focus();
+        };
+    }, [panel]);
 
     return (
         <header
             className={`fixed top-0 z-50 w-full transition-colors duration-300 ${scrolled ? "border-b border-border bg-bg" : "bg-transparent"
                 }`}
         >
-            <nav className="grid grid-cols-3 items-center px-5 md:py-5 md:px-10">
+            <nav
+                className={`mx-auto grid max-w-7xl grid-cols-3 items-center px-5 transition-all duration-300 md:px-10 ${scrolled ? "md:py-2" : "md:py-5"
+                    }`}
+            >
                 <div className="flex items-center">
                     <button
+                        ref={menuBtnRef}
                         onClick={openMenu}
                         aria-label="Abrir menú"
                         aria-expanded={menuOpen}
@@ -91,7 +158,8 @@ export default function Navbar() {
                 >
                     <a href="#inicio">
                         <Image
-                            className="transition-all duration-100 hover:-translate-y-1"
+                            className={`transition-all duration-300 hover:-translate-y-1 ${scrolled ? "md:w-24" : ""
+                                }`}
                             src="/logo.png"
                             alt="Nai — Velas artesanales"
                             width={140}
@@ -103,6 +171,7 @@ export default function Navbar() {
 
                 <div className="flex items-center justify-end gap-4 text-sm">
                     <button
+                        ref={cartBtnRef}
                         onClick={openCart}
                         aria-label="Abrir carrito"
                         aria-expanded={cartOpen}
@@ -118,12 +187,16 @@ export default function Navbar() {
                 <div
                     onClick={menuOpen ? closeMenu : closeCart}
                     aria-hidden="true"
-                    className="fixed inset-0 z-40 bg-[rgba(43,42,38,0.45)]"
+                    className={`fixed inset-0 z-40 bg-[rgba(43,42,38,0.45)] ${menuOpen ? "md:hidden" : ""}`}
                 />
             )}
 
             <div
+                ref={menuRef}
                 id="menu-movil"
+                role="dialog"
+                aria-modal="true"
+                aria-label="Menú"
                 inert={!menuOpen}
                 className={`fixed top-0 bottom-0 left-0 z-50 flex w-64 flex-col border-r border-border bg-bg px-8 py-20 transition-transform duration-500 ease-in-out md:hidden ${menuOpen ? "translate-x-0" : "-translate-x-full"
                     }`}
@@ -157,7 +230,10 @@ export default function Navbar() {
             </div>
 
             <div
+                ref={cartRef}
                 id="carrito"
+                role="dialog"
+                aria-modal="true"
                 aria-label="Carrito"
                 inert={!cartOpen}
                 className={`fixed top-0 right-0 bottom-0 z-50 flex w-80 flex-col border-l border-border bg-bg transition-transform duration-500 ease-in-out ${cartOpen ? "translate-x-0" : "translate-x-full"

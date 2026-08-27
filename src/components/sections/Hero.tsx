@@ -1,11 +1,34 @@
 "use client";
 
-import Image from "next/image";
+import { getImageProps } from "next/image";
 import { motion } from "motion/react";
 import heroImage from "../../../public/hero.png";
 import heroMobileImage from "../../../public/hero-movil.png";
 
+const commonImg = {
+    alt: "Velas artesanales Nai",
+    sizes: "100vw",
+    loading: "eager" as const,
+    fetchPriority: "high" as const,
+};
+
 export default function Hero() {
+    const {
+        props: { srcSet: desktopSrcSet },
+    } = getImageProps({
+        ...commonImg,
+        src: heroImage,
+        width: 1916,
+        height: 821,
+    });
+
+    const { props: mobileImgProps } = getImageProps({
+        ...commonImg,
+        src: heroMobileImage,
+        width: 941,
+        height: 1672,
+    });
+
     return (
         <section
             id="inicio"
@@ -18,24 +41,15 @@ export default function Hero() {
                 transition={{ duration: 2.8, ease: [0.25, 1, 0.35, 1] }}
                 className="relative h-110 w-full overflow-hidden will-change-transform lg:absolute lg:inset-0 lg:h-auto lg:min-h-0"
             >
-                <Image
-                    src={heroMobileImage}
-                    alt="Velas artesanales Nai"
-                    fill
-                    sizes="100vw"
-                    fetchPriority="high"
-                    draggable={false}
-                    className="pointer-events-none -translate-x-2 scale-[1.05] select-none object-cover object-[center_40%] lg:hidden"
-                />
-                <Image
-                    src={heroImage}
-                    alt="Velas artesanales Nai"
-                    fill
-                    sizes="100vw"
-                    fetchPriority="high"
-                    draggable={false}
-                    className="pointer-events-none hidden select-none object-cover object-center lg:block"
-                />
+                <picture>
+                    <source media="(min-width: 1024px)" srcSet={desktopSrcSet} />
+                    <img
+                        {...mobileImgProps}
+                        alt="Velas artesanales Nai"
+                        draggable={false}
+                        className="pointer-events-none absolute inset-0 h-full w-full -translate-x-2 scale-[1.05] select-none object-cover object-[center_40%] lg:translate-x-0 lg:scale-100 lg:object-center"
+                    />
+                </picture>
                 <div
                     aria-hidden="true"
                     className="pointer-events-none absolute inset-0 bg-linear-to-t from-bg from-4% via-[rgba(250,249,245,0.45)] via-10% to-[rgba(250,249,245,0)] to-45% lg:hidden"

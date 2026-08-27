@@ -14,3 +14,7 @@
   --color-muted: #8a8779;
   --color-ink: #2b2a26;
 }
+
+html {
+  scroll-padding-top: 5rem;
+}
