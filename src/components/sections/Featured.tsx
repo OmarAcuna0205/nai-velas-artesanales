@@ -49,8 +49,6 @@ const items: Item[] = [
     },
 ];
 
-const ease = [0.25, 1, 0.35, 1] as const;
-
 export default function Featured() {
     return (
         <section
@@ -63,8 +61,11 @@ export default function Featured() {
                     id="destacados-titulo"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.6 }}
-                    transition={{ duration: 0.8, ease }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{
+                        duration: 0.5,
+                        ease: [0.25, 1, 0.35, 1],
+                    }}
                     className="text-center font-display text-4xl font-light tracking-tight text-ink lg:text-5xl"
                 >
                     Destacados
@@ -74,13 +75,13 @@ export default function Featured() {
                     {items.map((item, index) => (
                         <motion.li
                             key={item.title}
-                            initial={{ opacity: 0, y: 32 }}
+                            initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, amount: 0.25 }}
                             transition={{
-                                duration: 0.8,
-                                delay: index * 0.12,
-                                ease,
+                                duration: 0.5,
+                                delay: index * 0.1,
+                                ease: [0.25, 1, 0.35, 1],
                             }}
                             className="group"
                         >
@@ -88,13 +89,12 @@ export default function Featured() {
                                 <Image
                                     src={item.image}
                                     alt={item.alt}
-                                    sizes="(min-width: 768px) 33vw, 100vw"
                                     className="aspect-3/4 w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                                 />
                             </div>
 
-                            <div className="relative z-10 -mt-14 mx-5 bg-surface px-6 py-7 text-center shadow-[0_1px_2px_rgba(43,42,38,0.06)] transition-transform duration-500 ease-out group-hover:-translate-y-2">
-                                <p className="font-display text-xs font-semibold uppercase tracking-[0.22em] text-brand">
+                            <div className="relative z-10 -mt-14 mx-5 bg-surface px-6 py-7 text-center shadow-lg transition-transform duration-500 ease-out group-hover:-translate-y-2">
+                                <p className="font-display text-xs font-semibold uppercase tracking-wider text-brand">
                                     {item.eyebrow}
                                 </p>
 
