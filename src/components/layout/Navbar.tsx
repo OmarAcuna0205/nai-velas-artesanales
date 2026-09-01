@@ -49,12 +49,10 @@ export default function Navbar() {
                 <div className="flex items-center">
                     <motion.button
                         onClick={openMenu}
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
                         transition={{
                             duration: 1.5,
-                            delay: 0.5,
-                            ease: "easeInOut",
                         }}
                         className="cursor-pointer md:hidden"
                     >
@@ -62,11 +60,10 @@ export default function Navbar() {
                     </motion.button>
 
                     <motion.ul
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
                         transition={{
                             duration: 1.5,
-                            delay: 0.5,
                             ease: "easeInOut",
                         }}
                         className="hidden gap-5 font-semibold md:flex"
@@ -86,12 +83,10 @@ export default function Navbar() {
 
                 <motion.div
                     className="flex justify-center"
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
                     transition={{
                         duration: 1.5,
-                        delay: 0.5,
-                        ease: "easeInOut",
                     }}
                 >
                     <a href="#inicio">
@@ -110,12 +105,10 @@ export default function Navbar() {
                 <div className="flex items-center justify-end text-sm">
                     <motion.button
                         onClick={openCart}
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
                         transition={{
                             duration: 1.5,
-                            delay: 0.5,
-                            ease: "easeInOut",
                         }}
                         className="cursor-pointer transition-colors hover:text-accent"
                     >
@@ -137,7 +130,7 @@ export default function Navbar() {
             >
                 <button
                     onClick={closeMenu}
-                    className="absolute top-6 right-6 cursor-pointer"
+                    className="absolute top-6 left-6 cursor-pointer"
                 >
                     <XIcon size={26} weight="light" />
                 </button>
@@ -159,10 +152,9 @@ export default function Navbar() {
                         <motion.li
                             key={link.href}
                             variants={{
-                                hidden: { opacity: 0, x: -15 },
+                                hidden: { opacity: 0 },
                                 show: {
                                     opacity: 1,
-                                    x: 0,
                                     transition: {
                                         duration: 0.45,
                                         ease: "easeInOut",
@@ -191,8 +183,8 @@ export default function Navbar() {
                         initial={false}
                         animate={
                             cartOpen
-                                ? { opacity: 1, x: 0 }
-                                : { opacity: 0, x: 15 }
+                                ? { opacity: 1 }
+                                : { opacity: 0 }
                         }
                         transition={{
                             duration: 0.45,
@@ -215,7 +207,7 @@ export default function Navbar() {
                 <motion.p
                     initial={false}
                     animate={
-                        cartOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }
+                        cartOpen ? { opacity: 1 } : { opacity: 0 }
                     }
                     transition={{
                         duration: 0.45,

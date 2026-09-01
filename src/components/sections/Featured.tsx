@@ -54,7 +54,7 @@ export default function Featured() {
         <section
             id="destacados"
             aria-labelledby="destacados-titulo"
-            className="scroll-mt-30 bg-bg px-6 pt-10 pb-20 md:scroll-mt-10 md:pt-28 md:pb-28 lg:px-10 xl:px-16 2xl:px-24"
+            className="scroll-mt-30 bg-bg px-6 pt-10 pb-10 md:scroll-mt-10 md:pt-28 md:pb-14 lg:px-10 xl:px-16 2xl:px-24"
         >
             <div className="mx-auto max-w-7xl">
                 <motion.h2
@@ -63,7 +63,7 @@ export default function Featured() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{
-                        duration: 0.5,
+                        duration: 0.9,
                         ease: [0.25, 1, 0.35, 1],
                     }}
                     className="text-center font-display text-4xl font-light tracking-tight text-ink lg:text-5xl"
@@ -79,8 +79,8 @@ export default function Featured() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, amount: 0.25 }}
                             transition={{
-                                duration: 0.5,
-                                delay: index * 0.1,
+                                duration: 0.9,
+                                delay: index * 0.15,
                                 ease: [0.25, 1, 0.35, 1],
                             }}
                             className="group"
@@ -93,7 +93,7 @@ export default function Featured() {
                                 />
                             </div>
 
-                            <div className="relative z-10 -mt-14 mx-5 bg-surface px-6 py-7 text-center shadow-lg transition-transform duration-500 ease-out group-hover:-translate-y-2">
+                            <div className="relative z-10 -mt-14 mx-5 bg-surface px-6 py-7 text-center shadow-xl transition-transform duration-500 ease-out group-hover:-translate-y-2">
                                 <p className="font-display text-xs font-semibold uppercase tracking-wider text-brand">
                                     {item.eyebrow}
                                 </p>
