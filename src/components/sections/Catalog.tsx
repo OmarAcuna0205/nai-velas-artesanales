@@ -321,7 +321,7 @@ export default function Catalog() {
         <section
             id="catalogo"
             aria-labelledby="catalogo-titulo"
-            className="scroll-mt-32 bg-bg pt-10 pb-20 md:scroll-mt-22 md:pt-14 md:pb-28"
+            className="scroll-mt-32 bg-bg pt-10 pb-10 md:scroll-mt-22 md:pt-14 md:pb-14"
         >
             <div className="mx-auto max-w-7xl px-6 lg:px-10">
                 <motion.h2

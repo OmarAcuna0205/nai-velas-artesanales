@@ -93,7 +93,7 @@ export default function Featured() {
                                 />
                             </div>
 
-                            <div className="relative z-10 -mt-14 mx-5 bg-surface px-6 py-7 text-center shadow-xl transition-transform duration-500 ease-out group-hover:-translate-y-2">
+                            <div className="relative z-10 -mt-14 mx-5 bg-surface px-6 py-7 text-center transition-transform duration-500 ease-out group-hover:-translate-y-2">
                                 <p className="font-display text-xs font-semibold uppercase tracking-wider text-brand">
                                     {item.eyebrow}
                                 </p>
