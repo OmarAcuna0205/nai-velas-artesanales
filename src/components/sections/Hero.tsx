@@ -56,7 +56,10 @@ export default function Hero() {
                     <div className="w-full max-w-xl">
                         <h1>
                             <span className="block font-display text-5xl tracking-tight text-ink lg:text-7xl">
-                                Hechas <span className="text-brand">100%</span>
+                                Hechas{" "}
+                                <span className="font-body italic text-brand">
+                                    100%
+                                </span>
                                 <br />
                                 a mano
                             </span>

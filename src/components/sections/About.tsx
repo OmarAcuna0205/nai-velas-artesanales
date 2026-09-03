@@ -148,7 +148,7 @@ export default function About() {
                                 className="aspect-4/5 w-full object-cover"
                             />
 
-                            <figcaption className="mt-4 mb-2 font-body text-xs italic text-muted">
+                            <figcaption className="mt-4 mb-2 font-body text-xs italic text-brand">
                                 Astronauta, 2023
                             </figcaption>
                         </figure>
