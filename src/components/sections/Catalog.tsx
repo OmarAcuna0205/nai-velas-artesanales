@@ -7,212 +7,50 @@ import {
     CaretRightIcon,
     ShoppingCartIcon,
 } from "@phosphor-icons/react";
+import { seasons, type Product } from "@/data/seasons";
 
-type Product = {
-    name: string;
-    note: string;
-    price: number;
-    image: string;
-    hoverImage?: string;
-};
+function ProductCard({ product }: { product: Product }) {
+    return (
+        <li className="w-1/2 shrink-0 px-3 md:w-1/3">
+            <div className="group relative overflow-hidden">
+                <img
+                    src={product.image}
+                    alt={product.name}
+                    className="aspect-3/4 w-full object-cover md:aspect-square"
+                />
+                {product.hoverImage && (
+                    <img
+                        src={product.hoverImage}
+                        alt=""
+                        aria-hidden="true"
+                        className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                    />
+                )}
+            </div>
 
-type Season = {
-    id: string;
-    name: string;
-    banner: string;
-    headline: string;
-    description: string;
-    products: Product[];
-};
+            <p className="mt-3 font-display font-semibold text-accent">
+                {product.name}
+            </p>
 
-const seasons: Season[] = [
-    {
-        id: "primavera",
-        name: "Primavera",
-        banner: "/primaveraHero.png",
-        headline: "Floral · Verde · Frutal",
-        description: "Texto de relleno para la temporada de primavera.",
-        products: [
-            {
-                name: "Primavera 1",
-                note: "Aroma · duración",
-                price: 250,
-                image: "/primavera1.png",
-                hoverImage: "/primavera1.1.png",
-            },
-            {
-                name: "Primavera 2",
-                note: "Aroma · duración",
-                price: 250,
-                image: "/primavera2.png",
-            },
-            {
-                name: "Primavera 3",
-                note: "Aroma · duración",
-                price: 250,
-                image: "/primavera3.png",
-                hoverImage: "/primavera3.1.png",
-            },
-            {
-                name: "Primavera 4",
-                note: "Aroma · duración",
-                price: 250,
-                image: "/primavera4.png",
-                hoverImage: "/primavera4.1.png",
-            },
-        ],
-    },
-    {
-        id: "verano",
-        name: "Verano",
-        banner: "/veranoHero.png",
-        headline: "Cítrico · Fresco · Tropical",
-        description: "Texto de relleno para la temporada de verano.",
-        products: [
-            {
-                name: "Verano 1",
-                note: "Aroma · duración",
-                price: 250,
-                image: "/verano1.png",
-                hoverImage: "/verano1.1.png",
-            },
-            {
-                name: "Verano 2",
-                note: "Aroma · duración",
-                price: 250,
-                image: "/verano2.png",
-                hoverImage: "/verano2.1.png",
-            },
-            {
-                name: "Verano 3",
-                note: "Aroma · duración",
-                price: 250,
-                image: "/verano3.png",
-            },
-        ],
-    },
-    {
-        id: "otono",
-        name: "Otoño",
-        banner: "/otoñoHero.png",
-        headline: "Especias · Ámbar · Madera",
-        description: "Texto de relleno para la temporada de otoño.",
-        products: [
-            {
-                name: "Otoño 1",
-                note: "Aroma · duración",
-                price: 250,
-                image: "/otoño1.png",
-                hoverImage: "/otoño1.1.png",
-            },
-            {
-                name: "Otoño 2",
-                note: "Aroma · duración",
-                price: 250,
-                image: "/otoño2.png",
-                hoverImage: "/otoño2.2.png",
-            },
-            {
-                name: "Otoño 3",
-                note: "Aroma · duración",
-                price: 250,
-                image: "/otoño3.png",
-                hoverImage: "/otoño3.3.png",
-            },
-        ],
-    },
-    {
-        id: "invierno",
-        name: "Invierno",
-        banner: "/inviernoHero.png",
-        headline: "Resina · Vainilla · Humo",
-        description: "Texto de relleno para la temporada de invierno.",
-        products: [
-            {
-                name: "Invierno 1",
-                note: "Aroma · duración",
-                price: 250,
-                image: "/invierno1.png",
-                hoverImage: "/invierno1.1.png",
-            },
-            {
-                name: "Invierno 2",
-                note: "Aroma · duración",
-                price: 250,
-                image: "/invierno2.png",
-            },
-            {
-                name: "Invierno 3",
-                note: "Aroma · duración",
-                price: 250,
-                image: "/invierno3.png",
-            },
-        ],
-    },
-    {
-        id: "especiales",
-        name: "Ocasiones especiales",
-        banner: "/especialesHero.png",
-        headline: "Suave · Dulce · Floral",
-        description: "Texto de relleno para las ocasiones especiales.",
-        products: [
-            {
-                name: "Especial 1",
-                note: "Aroma · duración",
-                price: 250,
-                image: "/especiales1.png",
-                hoverImage: "/especiales1.1.png",
-            },
-            {
-                name: "Especial 2",
-                note: "Aroma · duración",
-                price: 250,
-                image: "/especiales2.png",
-                hoverImage: "/especiales2.1.png",
-            },
-            {
-                name: "Especial 3",
-                note: "Aroma · duración",
-                price: 250,
-                image: "/especiales3.png",
-                hoverImage: "/especiales3.1.png",
-            },
-            {
-                name: "Especial 4",
-                note: "Aroma · duración",
-                price: 250,
-                image: "/especiales4.png",
-            },
-            {
-                name: "Especial 5",
-                note: "Aroma · duración",
-                price: 250,
-                image: "/especiales5.png",
-            },
-            {
-                name: "Especial 6",
-                note: "Aroma · duración",
-                price: 250,
-                image: "/especiales6.png",
-                hoverImage: "/especiales6.1.png",
-            },
-            {
-                name: "Especial 7",
-                note: "Aroma · duración",
-                price: 250,
-                image: "/especiales7.png",
-                hoverImage: "/especiales7.1.png",
-            },
-            {
-                name: "Especial 8",
-                note: "Aroma · duración",
-                price: 250,
-                image: "/especiales8.png",
-                hoverImage: "/especiales8.1.png",
-            },
-        ],
-    },
-];
+            <p className="mt-1 font-body text-xs text-muted">{product.note}</p>
+
+            <p className="mt-1 font-display text-ink">${product.price}</p>
+
+            <motion.button
+                whileTap={{ scale: 0.96 }}
+                transition={{ duration: 0.15 }}
+                className="group/cart mt-4 flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-border px-4 py-2.5 font-display text-[10px] uppercase tracking-wider text-brand transition-colors duration-300 hover:border-brand hover:bg-brand hover:text-bg md:text-xs"
+            >
+                Agregar al carrito
+                <ShoppingCartIcon
+                    size={13}
+                    weight="bold"
+                    className="transition-transform duration-300 group-hover/cart:translate-x-0.5"
+                />
+            </motion.button>
+        </li>
+    );
+}
 
 function ProductCarousel({ products }: { products: Product[] }) {
     const [perView, setPerView] = useState(3);
@@ -230,12 +68,6 @@ function ProductCarousel({ products }: { products: Product[] }) {
 
     const safeIndex = Math.min(index, maxIndex);
 
-    const arrow = (enabled: boolean) =>
-        `rounded-full border p-2.5 transition-colors ${enabled
-            ? "cursor-pointer border-brand bg-brand text-bg hover:border-brand-deep hover:bg-brand-deep"
-            : "cursor-default border-border text-border"
-        }`;
-
     return (
         <div>
             <div className="mb-4 flex justify-end gap-2">
@@ -243,7 +75,10 @@ function ProductCarousel({ products }: { products: Product[] }) {
                     onClick={() => setIndex(safeIndex - 1)}
                     disabled={safeIndex === 0}
                     aria-label="Ver anteriores"
-                    className={arrow(safeIndex > 0)}
+                    className={`rounded-full border p-2.5 transition-colors ${safeIndex > 0
+                        ? "cursor-pointer border-brand bg-brand text-bg hover:border-brand-deep hover:bg-brand-deep"
+                        : "cursor-default border-border text-border"
+                        }`}
                 >
                     <CaretLeftIcon size={20} weight="bold" />
                 </button>
@@ -251,7 +86,10 @@ function ProductCarousel({ products }: { products: Product[] }) {
                     onClick={() => setIndex(safeIndex + 1)}
                     disabled={safeIndex === maxIndex}
                     aria-label="Ver siguientes"
-                    className={arrow(safeIndex < maxIndex)}
+                    className={`rounded-full border p-2.5 transition-colors ${safeIndex < maxIndex
+                        ? "cursor-pointer border-brand bg-brand text-bg hover:border-brand-deep hover:bg-brand-deep"
+                        : "cursor-default border-border text-border"
+                        }`}
                 >
                     <CaretRightIcon size={20} weight="bold" />
                 </button>
@@ -264,51 +102,7 @@ function ProductCarousel({ products }: { products: Product[] }) {
                     className="flex"
                 >
                     {products.map((product) => (
-                        <li
-                            key={product.name}
-                            className="w-1/2 shrink-0 px-3 md:w-1/3"
-                        >
-                            <div className="group relative overflow-hidden">
-                                <img
-                                    src={product.image}
-                                    alt={product.name}
-                                    className="aspect-3/4 w-full object-cover md:aspect-square"
-                                />
-                                {product.hoverImage && (
-                                    <img
-                                        src={product.hoverImage}
-                                        alt=""
-                                        aria-hidden="true"
-                                        className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                                    />
-                                )}
-                            </div>
-
-                            <p className="mt-3 font-display font-semibold text-accent">
-                                {product.name}
-                            </p>
-
-                            <p className="mt-1 font-body text-xs text-muted">
-                                {product.note}
-                            </p>
-
-                            <p className="mt-1 font-display text-ink">
-                                ${product.price}
-                            </p>
-
-                            <motion.button
-                                whileTap={{ scale: 0.96 }}
-                                transition={{ duration: 0.15 }}
-                                className="group/cart mt-4 flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-border px-4 py-2.5 font-display text-[10px] uppercase tracking-wider text-brand transition-colors duration-300 hover:border-brand hover:bg-brand hover:text-bg md:text-xs"
-                            >
-                                Agregar al carrito
-                                <ShoppingCartIcon
-                                    size={13}
-                                    weight="bold"
-                                    className="transition-transform duration-300 group-hover/cart:translate-x-0.5"
-                                />
-                            </motion.button>
-                        </li>
+                        <ProductCard key={product.name} product={product} />
                     ))}
                 </motion.ul>
             </div>

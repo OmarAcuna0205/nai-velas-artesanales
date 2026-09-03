@@ -13,7 +13,7 @@ export default function About() {
         <section
             id="nosotros"
             aria-labelledby="nosotros-titulo"
-            className="scroll-mt-32 bg-bg pt-10 pb-20 md:scroll-mt-22 md:pt-14 md:pb-28"
+            className="scroll-mt-32 bg-bg pt-10 pb-10 md:scroll-mt-22 md:pt-14 md:pb-14"
         >
             <div className="px-6 lg:px-10">
                 <motion.h2
