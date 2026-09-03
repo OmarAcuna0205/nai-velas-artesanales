@@ -10,6 +10,7 @@ const jost = Jost({
 
 const lora = Lora({
     subsets: ["latin"],
+    style: ["normal", "italic"],
     variable: "--font-lora",
     display: "swap",
 });

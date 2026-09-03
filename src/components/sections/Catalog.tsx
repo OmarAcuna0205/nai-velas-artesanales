@@ -30,7 +30,7 @@ const seasons: Season[] = [
         id: "primavera",
         name: "Primavera",
         banner: "/primaveraHero.png",
-        headline: "Floral · Verde · Fresco",
+        headline: "Floral · Verde · Frutal",
         description: "Texto de relleno para la temporada de primavera.",
         products: [
             {
