@@ -4,16 +4,20 @@ import Featured from "@/components/sections/Featured";
 import Catalog from "@/components/sections/Catalog";
 import About from "@/components/sections/About";
 import Contact from "@/components/sections/Contact";
+import Footer from "@/components/layout/Footer";
 
 export default function Home() {
     return (
-        <main>
+        <>
             <Navbar />
-            <Hero />
-            <Featured />
-            <Catalog />
-            <About />
-            <Contact />
-        </main>
+            <main>
+                <Hero />
+                <Featured />
+                <Catalog />
+                <About />
+                <Contact />
+            </main>
+            <Footer />
+        </>
     );
 }

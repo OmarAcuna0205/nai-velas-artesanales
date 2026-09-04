@@ -178,7 +178,7 @@ export default function Navbar() {
                 className={`fixed top-0 right-0 bottom-0 z-50 flex w-80 flex-col border-border bg-bg transition-transform duration-500 ease-in-out ${cartOpen ? "translate-x-0" : "translate-x-full"
                     }`}
             >
-                <div className="flex items-center justify-between border-b border-border px-6 py-5">
+                <div className="flex h-34 items-center justify-between border-b border-border px-6 md:h-28">
                     <motion.h2
                         initial={false}
                         animate={
