@@ -16,6 +16,11 @@
   --color-note: #f4efd4;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 html {
   -webkit-tap-highlight-color: transparent;
 }
