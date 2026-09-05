@@ -25,7 +25,7 @@ const items: Item[] = [
         description:
             "En la tradición mexicana, las velas de cera escamada iluminan los momentos más sagrados de la vida.",
         cta: "Ver en catálogo",
-        href: "#catalogo",
+        href: "#otono",
     },
     {
         image: featured2,
@@ -35,7 +35,7 @@ const items: Item[] = [
         description:
             " Aura: Un refugio de misterio y calma. Verano: La frescura de la temporada en una versión sobria.",
         cta: "Ver en catálogo",
-        href: "#catalogo",
+        href: "#verano",
     },
     {
         image: featured3,
@@ -45,7 +45,7 @@ const items: Item[] = [
         description:
             "Aún no tienes plan de a donde ir en este verano, pero si quieres que tu casa huela deli... Tenemos varias opciones para ti!",
         cta: "Ver en catálogo",
-        href: "#catalogo",
+        href: "#verano",
     },
 ];
 

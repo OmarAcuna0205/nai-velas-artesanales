@@ -7,6 +7,7 @@ import {
     TiktokLogoIcon,
 } from "@phosphor-icons/react";
 import { seasons } from "@/data/seasons";
+import { site } from "@/data/site";
 
 const navigationLinks = [
     { label: "Inicio", href: "#inicio" },
@@ -17,9 +18,9 @@ const navigationLinks = [
 ];
 
 const socialLinks = [
-    { label: "Instagram", href: "#", Icon: InstagramLogoIcon },
-    { label: "Facebook", href: "#", Icon: FacebookLogoIcon },
-    { label: "TikTok", href: "#", Icon: TiktokLogoIcon },
+    { label: "Instagram", href: site.instagram, Icon: InstagramLogoIcon },
+    { label: "Facebook", href: site.facebook, Icon: FacebookLogoIcon },
+    { label: "TikTok", href: site.tiktok, Icon: TiktokLogoIcon },
 ];
 
 export default function Footer() {
@@ -141,18 +142,18 @@ export default function Footer() {
                             <ul className="mt-4 grid gap-y-2">
                                 <li>
                                     <a
-                                        href="tel:+525500000000"
+                                        href={`tel:${site.phone}`}
                                         className="block whitespace-nowrap font-display text-sm text-bg transition-colors duration-300 hover:text-note focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-note"
                                     >
-                                        55 0000 0000
+                                        {site.phoneLabel}
                                     </a>
                                 </li>
                                 <li>
                                     <a
-                                        href="mailto:hola@naivelas.com"
+                                        href={`mailto:${site.email}`}
                                         className="block whitespace-nowrap font-display text-sm text-bg transition-colors duration-300 hover:text-note focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-note"
                                     >
-                                        hola@naivelas.com
+                                        {site.email}
                                     </a>
                                 </li>
                             </ul>
@@ -181,6 +182,8 @@ export default function Footer() {
                                     <li key={label}>
                                         <a
                                             href={href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             aria-label={label}
                                             className="flex h-9 w-9 items-center justify-center rounded-full border border-bg text-bg transition-colors duration-300 hover:border-note hover:bg-note hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-note"
                                         >
@@ -215,9 +218,9 @@ export default function Footer() {
                     <p>
                         Diseño web por{" "}
                         <a
-                            href="https://github.com/OmarAcuna0205"
+                            href={site.portfolio}
                             target="_blank"
-                            rel="noreferrer"
+                            rel="noopener noreferrer"
                             className="font-semibold text-bg underline decoration-border underline-offset-4 transition-colors duration-300 hover:text-note hover:decoration-note focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-note"
                         >
                             Omar Acuña

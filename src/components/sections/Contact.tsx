@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useTransition } from "react";
 import { motion } from "motion/react";
 import {
     InstagramLogoIcon,
@@ -8,9 +9,60 @@ import {
     EnvelopeSimpleIcon,
     ShoppingCartIcon,
     WhatsappLogoIcon,
+    CircleNotchIcon,
 } from "@phosphor-icons/react";
+import { sendContactMessage } from "@/actions/contact";
+import { LIMITS, validateContact, type ContactErrors } from "@/lib/validation";
+import { eventLink } from "@/lib/whatsapp";
+import { site } from "@/data/site";
 
 export default function Contact() {
+    const [nombre, setNombre] = useState("");
+    const [correo, setCorreo] = useState("");
+    const [mensaje, setMensaje] = useState("");
+    const [sitio, setSitio] = useState("");
+    const [errors, setErrors] = useState<ContactErrors>({});
+    const [feedback, setFeedback] = useState<{
+        ok: boolean;
+        text: string;
+    } | null>(null);
+    const [pending, startSending] = useTransition();
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        setFeedback(null);
+
+        const fields = { nombre, correo, mensaje };
+        const found = validateContact(fields);
+        setErrors(found);
+
+        if (Object.keys(found).length > 0) {
+            return;
+        }
+
+        startSending(async () => {
+            const result = await sendContactMessage({ ...fields, sitio });
+
+            if (result.ok) {
+                setNombre("");
+                setCorreo("");
+                setMensaje("");
+                setErrors({});
+                setFeedback({
+                    ok: true,
+                    text: "¡Listo! Te contestamos pronto.",
+                });
+                return;
+            }
+
+            setErrors(result.errors ?? {});
+            setFeedback({
+                ok: false,
+                text: result.message ?? "Revisa los campos marcados.",
+            });
+        });
+    };
+
     return (
         <section
             id="contacto"
@@ -47,7 +99,8 @@ export default function Contact() {
                 </motion.p>
 
                 <motion.form
-                    onSubmit={(event) => event.preventDefault()}
+                    onSubmit={handleSubmit}
+                    noValidate
                     initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.2 }}
@@ -70,9 +123,19 @@ export default function Contact() {
                                 id="nombre"
                                 name="nombre"
                                 type="text"
+                                value={nombre}
+                                onChange={(event) =>
+                                    setNombre(event.target.value)
+                                }
+                                maxLength={LIMITS.nombre.max}
                                 placeholder="Tu nombre"
                                 className="mt-2 w-full rounded-xl border border-border bg-bg px-4 py-3 font-body text-sm text-ink transition-colors placeholder:text-muted focus:border-brand focus:outline-none"
                             />
+                            {errors.nombre && (
+                                <p className="mt-2 font-body text-xs text-accent">
+                                    {errors.nombre}
+                                </p>
+                            )}
                         </div>
 
                         <div>
@@ -86,9 +149,19 @@ export default function Contact() {
                                 id="correo"
                                 name="correo"
                                 type="email"
+                                value={correo}
+                                onChange={(event) =>
+                                    setCorreo(event.target.value)
+                                }
+                                maxLength={LIMITS.correo.max}
                                 placeholder="tucorreo@correo.com"
                                 className="mt-2 w-full rounded-xl border border-border bg-bg px-4 py-3 font-body text-sm text-ink transition-colors placeholder:text-muted focus:border-brand focus:outline-none"
                             />
+                            {errors.correo && (
+                                <p className="mt-2 font-body text-xs text-accent">
+                                    {errors.correo}
+                                </p>
+                            )}
                         </div>
                     </div>
 
@@ -103,20 +176,80 @@ export default function Contact() {
                             id="mensaje"
                             name="mensaje"
                             rows={4}
+                            value={mensaje}
+                            onChange={(event) => setMensaje(event.target.value)}
+                            maxLength={LIMITS.mensaje.max}
                             placeholder="Escríbenos lo que quieras contarnos."
                             className="mt-2 w-full rounded-xl border border-border bg-bg px-4 py-3 font-body text-sm text-ink transition-colors placeholder:text-muted focus:border-brand focus:outline-none resize-none"
                         />
+
+                        <div className="mt-2 flex items-baseline justify-between gap-4">
+                            {errors.mensaje ? (
+                                <p className="font-body text-xs text-accent">
+                                    {errors.mensaje}
+                                </p>
+                            ) : (
+                                <span />
+                            )}
+
+                            <p
+                                className={`shrink-0 font-display text-xs ${mensaje.length > LIMITS.mensaje.max - 100
+                                    ? "text-accent"
+                                    : "text-muted"
+                                    }`}
+                            >
+                                {mensaje.length} / {LIMITS.mensaje.max}
+                            </p>
+                        </div>
                     </div>
+
+                    <input
+                        type="text"
+                        name="sitio"
+                        value={sitio}
+                        onChange={(event) => setSitio(event.target.value)}
+                        tabIndex={-1}
+                        autoComplete="off"
+                        aria-hidden="true"
+                        className="hidden"
+                    />
 
                     <motion.button
                         type="submit"
+                        disabled={pending}
                         whileTap={{ scale: 0.98 }}
                         transition={{ duration: 0.15 }}
-                        className="mt-7 flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-brand px-6 py-4 font-display text-xs font-semibold uppercase tracking-widest text-bg transition-colors duration-300 hover:bg-ink"
+                        className="mt-7 flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-brand px-6 py-4 font-display text-xs font-semibold uppercase tracking-widest text-bg transition-colors duration-300 hover:bg-ink disabled:cursor-default disabled:bg-muted"
                     >
-                        Enviar mensaje
-                        <EnvelopeSimpleIcon size={16} weight="bold" />
+                        {pending ? "Enviando" : "Enviar mensaje"}
+
+                        {pending ? (
+                            <motion.span
+                                animate={{ rotate: 360 }}
+                                transition={{
+                                    duration: 0.9,
+                                    repeat: Infinity,
+                                    ease: "linear",
+                                }}
+                                className="flex"
+                            >
+                                <CircleNotchIcon size={16} weight="bold" />
+                            </motion.span>
+                        ) : (
+                            <EnvelopeSimpleIcon size={16} weight="bold" />
+                        )}
                     </motion.button>
+
+                    <div aria-live="polite">
+                        {feedback && (
+                            <p
+                                className={`mt-4 text-center font-body text-sm ${feedback.ok ? "text-brand" : "text-accent"
+                                    }`}
+                            >
+                                {feedback.text}
+                            </p>
+                        )}
+                    </div>
                 </motion.form>
 
                 <div className="mt-6 grid gap-6 md:grid-cols-2">
@@ -170,7 +303,9 @@ export default function Contact() {
                         </p>
 
                         <motion.a
-                            href="#"
+                            href={eventLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             whileTap={{ scale: 0.97 }}
                             transition={{ duration: 0.15 }}
                             className="mt-6 inline-flex items-center gap-2 rounded-full border border-ink px-6 py-2.5 font-display text-[10px] font-semibold uppercase tracking-widest text-ink transition-colors duration-300 hover:bg-ink hover:text-bg"
@@ -193,13 +328,27 @@ export default function Contact() {
                     className="mt-12 flex justify-center gap-5"
                 >
                     {[
-                        { label: "Instagram", href: "#", Icon: InstagramLogoIcon },
-                        { label: "Facebook", href: "#", Icon: FacebookLogoIcon },
-                        { label: "TikTok", href: "#", Icon: TiktokLogoIcon },
+                        {
+                            label: "Instagram",
+                            href: site.instagram,
+                            Icon: InstagramLogoIcon,
+                        },
+                        {
+                            label: "Facebook",
+                            href: site.facebook,
+                            Icon: FacebookLogoIcon,
+                        },
+                        {
+                            label: "TikTok",
+                            href: site.tiktok,
+                            Icon: TiktokLogoIcon,
+                        },
                     ].map(({ label, href, Icon }) => (
                         <li key={label}>
                             <motion.a
                                 href={href}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 aria-label={label}
                                 whileHover={{ y: -4, scale: 1.1 }}
                                 whileTap={{ scale: 0.95 }}

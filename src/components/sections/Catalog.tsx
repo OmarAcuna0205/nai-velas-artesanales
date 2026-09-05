@@ -8,8 +8,11 @@ import {
     ShoppingCartIcon,
 } from "@phosphor-icons/react";
 import { seasons, type Product } from "@/data/seasons";
+import { useCart } from "@/context/CartContext";
 
 function ProductCard({ product }: { product: Product }) {
+    const { addItem } = useCart();
+
     return (
         <li className="w-1/2 shrink-0 px-3 md:w-1/3">
             <div className="group relative overflow-hidden">
@@ -37,6 +40,7 @@ function ProductCard({ product }: { product: Product }) {
             <p className="mt-1 font-display text-ink">${product.price}</p>
 
             <motion.button
+                onClick={() => addItem(product)}
                 whileTap={{ scale: 0.96 }}
                 transition={{ duration: 0.15 }}
                 className="group/cart mt-4 flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-border px-4 py-2.5 font-display text-[10px] uppercase tracking-wider text-brand transition-colors duration-300 hover:border-brand hover:bg-brand hover:text-bg md:text-xs"
@@ -102,7 +106,7 @@ function ProductCarousel({ products }: { products: Product[] }) {
                     className="flex"
                 >
                     {products.map((product) => (
-                        <ProductCard key={product.name} product={product} />
+                        <ProductCard key={product.id} product={product} />
                     ))}
                 </motion.ul>
             </div>

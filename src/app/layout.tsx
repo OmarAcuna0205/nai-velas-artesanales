@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Jost, Lora } from "next/font/google";
+import { CartProvider } from "@/context/CartContext";
 import "./globals.css";
 
 const jost = Jost({
@@ -27,7 +28,9 @@ export default function RootLayout({
 }) {
     return (
         <html lang="es" className={`${jost.variable} ${lora.variable}`}>
-            <body className="font-display">{children}</body>
+            <body className="font-display">
+                <CartProvider>{children}</CartProvider>
+            </body>
         </html>
     );
 }

@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 import { ListIcon, XIcon, ShoppingCartIcon } from "@phosphor-icons/react";
+import { useCart } from "@/context/CartContext";
+import Drawer from "@/components/cart/Drawer";
 
 const links = [
     { label: "Inicio", href: "#inicio" },
@@ -14,21 +16,20 @@ const links = [
 ];
 
 export default function Navbar() {
+    const { count, cartOpen, openCart, closeCart } = useCart();
     const [menuOpen, setMenuOpen] = useState(false);
-    const [cartOpen, setCartOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
 
     const openMenu = () => {
-        setCartOpen(false);
+        closeCart();
         setMenuOpen(true);
     };
     const closeMenu = () => setMenuOpen(false);
 
-    const openCart = () => {
+    const showCart = () => {
         setMenuOpen(false);
-        setCartOpen(true);
+        openCart();
     };
-    const closeCart = () => setCartOpen(false);
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 40);
@@ -104,15 +105,32 @@ export default function Navbar() {
 
                 <div className="flex items-center justify-end text-sm">
                     <motion.button
-                        onClick={openCart}
+                        onClick={showCart}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{
                             duration: 1.5,
                         }}
-                        className="cursor-pointer transition-colors hover:text-accent"
+                        aria-label="Abrir carrito"
+                        className="relative cursor-pointer transition-colors hover:text-accent"
                     >
                         <ShoppingCartIcon size={30} weight="light" />
+
+                        {count > 0 && (
+                            <motion.span
+                                key={count}
+                                initial={{ scale: 0.4, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                transition={{
+                                    type: "spring",
+                                    stiffness: 420,
+                                    damping: 16,
+                                }}
+                                className="absolute -top-1 -right-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-brand px-1 font-display text-xs text-bg"
+                            >
+                                {count}
+                            </motion.span>
+                        )}
                     </motion.button>
                 </div>
             </nav>
@@ -174,51 +192,7 @@ export default function Navbar() {
                 </motion.ul>
             </div>
 
-            <div
-                className={`fixed top-0 right-0 bottom-0 z-50 flex w-80 flex-col border-border bg-bg transition-transform duration-500 ease-in-out ${cartOpen ? "translate-x-0" : "translate-x-full"
-                    }`}
-            >
-                <div className="flex h-34 items-center justify-between px-6 md:h-28">
-                    <motion.h2
-                        initial={false}
-                        animate={
-                            cartOpen
-                                ? { opacity: 1 }
-                                : { opacity: 0 }
-                        }
-                        transition={{
-                            duration: 0.45,
-                            delay: cartOpen ? 0.25 : 0,
-                            ease: "easeInOut",
-                        }}
-                        className="text-sm font-semibold uppercase tracking-wide text-ink"
-                    >
-                        Carrito
-                    </motion.h2>
-
-                    <button
-                        onClick={closeCart}
-                        className="cursor-pointer transition-colors hover:text-accent"
-                    >
-                        <XIcon size={26} weight="light" />
-                    </button>
-                </div>
-
-                <motion.p
-                    initial={false}
-                    animate={
-                        cartOpen ? { opacity: 1 } : { opacity: 0 }
-                    }
-                    transition={{
-                        duration: 0.45,
-                        delay: cartOpen ? 0.25 : 0,
-                        ease: "easeInOut",
-                    }}
-                    className="px-6 py-10 font-body text-sm text-muted"
-                >
-                    Tu carrito está vacío.
-                </motion.p>
-            </div>
+            <Drawer />
         </header>
     );
 }
