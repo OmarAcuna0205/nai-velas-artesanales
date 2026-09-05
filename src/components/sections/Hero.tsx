@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import heroImage from "../../../public/hero.png";
 import heroMobileImage from "../../../public/hero-movil.png";
+import { contactLink } from "@/lib/whatsapp";
 
 export default function Hero() {
     return (
@@ -79,7 +80,9 @@ export default function Hero() {
                                 Ver catálogo
                             </a>
                             <a
-                                href="#contacto"
+                                href={contactLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="group hidden items-center gap-2 border-b border-ink/25 pb-1 text-sm text-ink transition-colors hover:border-accent hover:text-accent lg:inline-flex"
                             >
                                 Pedir por WhatsApp

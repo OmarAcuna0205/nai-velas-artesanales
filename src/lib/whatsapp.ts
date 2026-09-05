@@ -24,3 +24,7 @@ export function buildOrderLink(items: OrderLine[], total: number) {
 export const eventLink = `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(
     "Hola, me gustaría cotizar velas para un evento.",
 )}`;
+
+export const contactLink = `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(
+    "Hola, me interesan sus velas artesanales.",
+)}`;

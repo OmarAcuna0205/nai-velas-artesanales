@@ -38,6 +38,18 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
+    useEffect(() => {
+        if (!menuOpen) {
+            return;
+        }
+
+        document.documentElement.style.overflow = "hidden";
+
+        return () => {
+            document.documentElement.style.overflow = "";
+        };
+    }, [menuOpen]);
+
     return (
         <header
             className={`fixed top-0 z-50 w-full transition-colors duration-300 ${scrolled ? "border-b border-border bg-bg" : "bg-transparent"

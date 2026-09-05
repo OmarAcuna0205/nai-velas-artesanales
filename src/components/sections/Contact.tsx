@@ -11,7 +11,7 @@ import {
     WhatsappLogoIcon,
     CircleNotchIcon,
 } from "@phosphor-icons/react";
-import { sendContactMessage } from "@/actions/contact";
+import { sendContactMessage } from "@/lib/contact";
 import { LIMITS, validateContact, type ContactErrors } from "@/lib/validation";
 import { eventLink } from "@/lib/whatsapp";
 import { site } from "@/data/site";
@@ -20,7 +20,7 @@ export default function Contact() {
     const [nombre, setNombre] = useState("");
     const [correo, setCorreo] = useState("");
     const [mensaje, setMensaje] = useState("");
-    const [sitio, setSitio] = useState("");
+    const [botcheck, setBotcheck] = useState(false);
     const [errors, setErrors] = useState<ContactErrors>({});
     const [feedback, setFeedback] = useState<{
         ok: boolean;
@@ -41,7 +41,7 @@ export default function Contact() {
         }
 
         startSending(async () => {
-            const result = await sendContactMessage({ ...fields, sitio });
+            const result = await sendContactMessage({ ...fields, botcheck });
 
             if (result.ok) {
                 setNombre("");
@@ -187,10 +187,10 @@ export default function Contact() {
                     </div>
 
                     <input
-                        type="text"
-                        name="sitio"
-                        value={sitio}
-                        onChange={(event) => setSitio(event.target.value)}
+                        type="checkbox"
+                        name="botcheck"
+                        checked={botcheck}
+                        onChange={(event) => setBotcheck(event.target.checked)}
                         tabIndex={-1}
                         autoComplete="off"
                         aria-hidden="true"

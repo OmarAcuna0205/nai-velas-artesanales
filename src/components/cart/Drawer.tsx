@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import {
     XIcon,
@@ -70,6 +71,18 @@ function CartCard({ item }: { item: CartItem }) {
 export default function Drawer() {
     const { items, total, cartOpen, closeCart } = useCart();
 
+    useEffect(() => {
+        if (!cartOpen) {
+            return;
+        }
+
+        document.documentElement.style.overflow = "hidden";
+
+        return () => {
+            document.documentElement.style.overflow = "";
+        };
+    }, [cartOpen]);
+
     return (
         <div
             className={`fixed top-0 right-0 bottom-0 z-50 flex w-80 flex-col bg-bg transition-transform duration-500 ease-in-out ${cartOpen ? "translate-x-0" : "translate-x-full"
@@ -120,7 +133,7 @@ export default function Drawer() {
                             delay: cartOpen ? 0.25 : 0,
                             ease: "easeInOut",
                         }}
-                        className="flex-1 overflow-y-auto px-6 pb-2"
+                        className="flex-1 overflow-y-auto overscroll-contain px-6 pb-2"
                     >
                         <AnimatePresence initial={false}>
                             {items.map((item) => (

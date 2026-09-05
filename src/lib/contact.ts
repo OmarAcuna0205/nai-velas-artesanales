@@ -1,5 +1,3 @@
-"use server";
-
 import {
     validateContact,
     type ContactErrors,
@@ -13,9 +11,9 @@ type ContactResult = {
 };
 
 export async function sendContactMessage(
-    fields: ContactFields & { sitio: string },
+    fields: ContactFields & { botcheck: boolean },
 ): Promise<ContactResult> {
-    if (fields.sitio.trim()) {
+    if (fields.botcheck) {
         return { ok: true };
     }
 
@@ -25,7 +23,7 @@ export async function sendContactMessage(
         return { ok: false, errors };
     }
 
-    const accessKey = process.env.WEB3FORMS_ACCESS_KEY;
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
 
     if (!accessKey) {
         return {
@@ -49,11 +47,12 @@ export async function sendContactMessage(
                 subject: `Naí — mensaje de ${nombre}`,
                 from_name: "Naí Velas Artesanales",
                 replyto: correo,
+                botcheck: false,
                 name: nombre,
                 email: correo,
                 message: fields.mensaje.trim(),
             }),
-            signal: AbortSignal.timeout(10000),
+            signal: AbortSignal.timeout(15000),
         });
 
         const result = await response.json();
