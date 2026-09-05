@@ -63,7 +63,7 @@ export default function Featured() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{
-                        duration: 2,
+                        duration: 1.4,
                         ease: [0.25, 1, 0.35, 1],
                     }}
                     className="text-center font-display text-4xl font-light tracking-tight text-ink lg:text-5xl"
@@ -79,8 +79,8 @@ export default function Featured() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, amount: 0.25 }}
                             transition={{
-                                duration: 2,
-                                delay: index * 0.5,
+                                duration: 1.4,
+                                delay: index * 0.2,
                                 ease: [0.25, 1, 0.35, 1],
                             }}
                             className="group"

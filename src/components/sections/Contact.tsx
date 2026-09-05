@@ -81,23 +81,6 @@ export default function Contact() {
                     Contacto
                 </motion.h2>
 
-                <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.5 }}
-                    transition={{
-                        duration: 0.9,
-                        delay: 0.2,
-                        ease: [0.25, 1, 0.35, 1],
-                    }}
-                    className="mt-14 text-center font-display text-5xl font-light tracking-tight text-ink lg:mt-20 lg:text-6xl"
-                >
-                    Habla con{" "}
-                    <span className="font-body italic text-brand">
-                        nosotros
-                    </span>
-                </motion.p>
-
                 <motion.form
                     onSubmit={handleSubmit}
                     noValidate
