@@ -1,4 +1,5 @@
 export const site = {
+    web3formsKey: "35425e80-4ede-49e6-bb6e-bf487d080ade",
     whatsappNumber: "526144050784",
     email: "hola@naivelas.com",
     phone: "+525500000000",

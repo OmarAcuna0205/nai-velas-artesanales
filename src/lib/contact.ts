@@ -3,6 +3,7 @@ import {
     type ContactErrors,
     type ContactFields,
 } from "@/lib/validation";
+import { site } from "@/data/site";
 
 type ContactResult = {
     ok: boolean;
@@ -23,15 +24,6 @@ export async function sendContactMessage(
         return { ok: false, errors };
     }
 
-    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
-
-    if (!accessKey) {
-        return {
-            ok: false,
-            message: "No se pudo enviar. Inténtalo más tarde.",
-        };
-    }
-
     const nombre = fields.nombre.trim().replace(/[\r\n]+/g, " ");
     const correo = fields.correo.trim();
 
@@ -43,7 +35,7 @@ export async function sendContactMessage(
                 Accept: "application/json",
             },
             body: JSON.stringify({
-                access_key: accessKey,
+                access_key: site.web3formsKey,
                 subject: `Naí — mensaje de ${nombre}`,
                 from_name: "Naí Velas Artesanales",
                 replyto: correo,
