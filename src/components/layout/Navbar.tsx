@@ -9,8 +9,8 @@ import Drawer from "@/components/cart/Drawer";
 
 const links = [
     { label: "Inicio", href: "#inicio" },
-    { label: "Destacados", href: "#destacados" },
     { label: "Catálogo", href: "#catalogo" },
+    { label: "Destacados", href: "#destacados" },
     { label: "Nosotros", href: "#nosotros" },
     { label: "Contacto", href: "#contacto" },
 ];

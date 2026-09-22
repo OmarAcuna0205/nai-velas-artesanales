@@ -5,24 +5,54 @@ export type Product = {
     price: number;
     image: string;
     hoverImage?: string;
+    description?: string;
 };
 
 export type Season = {
     id: string;
     name: string;
     banner: string;
-    headline: string;
-    description: string;
+    isNew?: boolean;
     products: Product[];
 };
 
 export const seasons: Season[] = [
     {
+        id: "nuevo",
+        name: "Lo más nuevo",
+        banner: "/nuevoHero.png",
+        isNew: true,
+        products: [
+            {
+                id: "nuevo-1",
+                name: "Nuevo 1",
+                description: "Aquí va una frase breve sobre esta vela.",
+                note: "Aroma · duración",
+                price: 250,
+                image: "/featured1.png",
+            },
+            {
+                id: "nuevo-2",
+                name: "Nuevo 2",
+                description: "Aquí va una frase breve sobre esta vela.",
+                note: "Aroma · duración",
+                price: 250,
+                image: "/featured2.png",
+            },
+            {
+                id: "nuevo-3",
+                name: "Nuevo 3",
+                description: "Aquí va una frase breve sobre esta vela.",
+                note: "Aroma · duración",
+                price: 250,
+                image: "/featured3.png",
+            },
+        ],
+    },
+    {
         id: "primavera",
         name: "Primavera",
         banner: "/primaveraHero.png",
-        headline: "Floral · Verde · Frutal",
-        description: "Texto de relleno para la temporada de primavera.",
         products: [
             {
                 id: "primavera-1",
@@ -61,8 +91,6 @@ export const seasons: Season[] = [
         id: "verano",
         name: "Verano",
         banner: "/veranoHero.png",
-        headline: "Cítrico · Fresco · Tropical",
-        description: "Texto de relleno para la temporada de verano.",
         products: [
             {
                 id: "verano-1",
@@ -93,8 +121,6 @@ export const seasons: Season[] = [
         id: "otono",
         name: "Otoño",
         banner: "/otoñoHero.png",
-        headline: "Especias · Ámbar · Madera",
-        description: "Texto de relleno para la temporada de otoño.",
         products: [
             {
                 id: "otono-1",
@@ -126,8 +152,6 @@ export const seasons: Season[] = [
         id: "invierno",
         name: "Invierno",
         banner: "/inviernoHero.png",
-        headline: "Resina · Vainilla · Humo",
-        description: "Texto de relleno para la temporada de invierno.",
         products: [
             {
                 id: "invierno-1",
@@ -157,8 +181,6 @@ export const seasons: Season[] = [
         id: "especiales",
         name: "Ocasiones especiales",
         banner: "/especialesHero.png",
-        headline: "Suave · Dulce · Floral",
-        description: "Texto de relleno para las ocasiones especiales.",
         products: [
             {
                 id: "especial-1",

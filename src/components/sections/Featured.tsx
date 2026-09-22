@@ -54,7 +54,7 @@ export default function Featured() {
         <section
             id="destacados"
             aria-labelledby="destacados-titulo"
-            className="scroll-mt-30 bg-bg px-6 pt-10 pb-10 md:scroll-mt-10 md:pt-28 md:pb-14 lg:px-10 xl:px-16 2xl:px-24"
+            className="scroll-mt-32 bg-bg px-6 pt-10 pb-10 md:scroll-mt-22 md:pt-14 md:pb-14 lg:px-10 xl:px-16 2xl:px-24"
         >
             <div className="mx-auto max-w-7xl">
                 <motion.h2

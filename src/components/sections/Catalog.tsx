@@ -10,7 +10,13 @@ import {
 import { seasons, type Product } from "@/data/seasons";
 import { useCart } from "@/context/CartContext";
 
-function ProductCard({ product }: { product: Product }) {
+function ProductCard({
+    product,
+    isNew,
+}: {
+    product: Product;
+    isNew: boolean;
+}) {
     const { addItem } = useCart();
 
     return (
@@ -35,9 +41,21 @@ function ProductCard({ product }: { product: Product }) {
                 {product.name}
             </p>
 
+            {product.description && (
+                <p className="mt-1 font-body text-sm leading-snug text-ink">
+                    {product.description}
+                </p>
+            )}
+
             <p className="mt-1 font-body text-xs text-muted">{product.note}</p>
 
             <p className="mt-1 font-display text-ink">${product.price}</p>
+
+            {!isNew && (
+                <p className="mt-1 font-body text-xs italic text-muted">
+                    Tarda de 7 a 9 días en hacerse
+                </p>
+            )}
 
             <motion.button
                 onClick={() => addItem(product)}
@@ -56,7 +74,13 @@ function ProductCard({ product }: { product: Product }) {
     );
 }
 
-function ProductCarousel({ products }: { products: Product[] }) {
+function ProductCarousel({
+    products,
+    isNew,
+}: {
+    products: Product[];
+    isNew: boolean;
+}) {
     const [perView, setPerView] = useState(3);
     const [index, setIndex] = useState(0);
 
@@ -106,7 +130,11 @@ function ProductCarousel({ products }: { products: Product[] }) {
                     className="flex"
                 >
                     {products.map((product) => (
-                        <ProductCard key={product.id} product={product} />
+                        <ProductCard
+                            key={product.id}
+                            product={product}
+                            isNew={isNew}
+                        />
                     ))}
                 </motion.ul>
             </div>
@@ -119,7 +147,7 @@ export default function Catalog() {
         <section
             id="catalogo"
             aria-labelledby="catalogo-titulo"
-            className="scroll-mt-32 bg-bg pt-10 pb-10 md:scroll-mt-22 md:pt-14 md:pb-14"
+            className="scroll-mt-30 bg-bg pt-10 pb-10 md:scroll-mt-10 md:pt-28 md:pb-14"
         >
             <div className="mx-auto max-w-7xl px-6 lg:px-10">
                 <motion.h2
@@ -187,26 +215,23 @@ export default function Catalog() {
                         />
                         <div className="absolute inset-0 bg-linear-to-t from-ink to-transparent to-70%" />
 
-                        <div className="absolute right-6 bottom-8 left-6 lg:right-10 lg:left-10">
+                        <div className="absolute right-6 bottom-8 left-6 lg:right-10 lg:bottom-10 lg:left-10">
                             <div className="mx-auto max-w-7xl">
-                                <p className="font-display text-base uppercase tracking-widest text-accent lg:text-xl">
-                                    {season.name}
-                                </p>
                                 <h3
                                     id={`${season.id}-titulo`}
-                                    className="mt-2 font-display text-3xl text-bg lg:text-4xl"
+                                    className="font-display text-3xl uppercase tracking-wide text-bg lg:text-5xl"
                                 >
-                                    {season.headline}
+                                    {season.name}
                                 </h3>
-                                <p className="mt-3 max-w-md font-body text-sm text-bg">
-                                    {season.description}
-                                </p>
                             </div>
                         </div>
                     </div>
 
                     <div className="mx-auto mt-10 max-w-7xl px-6 lg:px-10">
-                        <ProductCarousel products={season.products} />
+                        <ProductCarousel
+                            products={season.products}
+                            isNew={season.isNew ?? false}
+                        />
                     </div>
                 </section>
             ))}

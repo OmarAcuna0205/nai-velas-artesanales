@@ -11,8 +11,8 @@ import { site } from "@/data/site";
 
 const navigationLinks = [
     { label: "Inicio", href: "#inicio" },
-    { label: "Destacados", href: "#destacados" },
     { label: "Catálogo", href: "#catalogo" },
+    { label: "Destacados", href: "#destacados" },
     { label: "Nosotros", href: "#nosotros" },
     { label: "Contacto", href: "#contacto" },
 ];
