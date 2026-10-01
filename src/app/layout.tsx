@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Jost, Lora } from "next/font/google";
 import { CartProvider } from "@/context/CartContext";
+import { LoaderProvider } from "@/context/LoaderContext";
 import "./globals.css";
 
 const jost = Jost({
@@ -18,7 +19,7 @@ const lora = Lora({
 
 export const metadata: Metadata = {
     title: "Nai — Velas artesanales",
-    description: "Velas artesanales hechas a mano en Chihuahua.",
+    description: "Velas artesanales hechas a mano. Entregas en CDMX y Morelia.",
 };
 
 export default function RootLayout({
@@ -29,7 +30,9 @@ export default function RootLayout({
     return (
         <html lang="es" className={`${jost.variable} ${lora.variable}`}>
             <body className="font-display">
-                <CartProvider>{children}</CartProvider>
+                <LoaderProvider>
+                    <CartProvider>{children}</CartProvider>
+                </LoaderProvider>
             </body>
         </html>
     );

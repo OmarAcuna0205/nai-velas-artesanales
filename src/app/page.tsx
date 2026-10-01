@@ -5,10 +5,12 @@ import Catalog from "@/components/sections/Catalog";
 import About from "@/components/sections/About";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/layout/Footer";
+import Loader from "@/components/layout/Loader";
 
 export default function Home() {
     return (
         <>
+            <Loader />
             <Navbar />
             <main>
                 <Hero />
