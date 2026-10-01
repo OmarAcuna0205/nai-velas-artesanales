@@ -1,4 +1,8 @@
 export const site = {
+    name: "Naí Velas Artesanales",
+    url: "https://naivelas.com",
+    // ID de Google Analytics 4 (G-XXXXXXX); mientras esté vacío no se carga
+    gaId: "",
     web3formsKey: "35425e80-4ede-49e6-bb6e-bf487d080ade",
     whatsappNumber: "526141338824",
     email: "naivelas@gmail.com",

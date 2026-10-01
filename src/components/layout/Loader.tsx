@@ -66,6 +66,7 @@ export default function Loader() {
         <AnimatePresence>
             {!ready && (
                 <motion.div
+                    id="site-loader"
                     ref={overlayRef}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.8, ease: "easeInOut" }}

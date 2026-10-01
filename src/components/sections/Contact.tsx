@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import Link from "next/link";
 import { motion } from "motion/react";
 import {
     InstagramLogoIcon,
@@ -222,6 +223,17 @@ export default function Contact() {
                             <EnvelopeSimpleIcon size={16} weight="bold" />
                         )}
                     </motion.button>
+
+                    <p className="mt-3 text-center font-body text-xs text-muted">
+                        Al enviar aceptas nuestro{" "}
+                        <Link
+                            href="/aviso-de-privacidad"
+                            className="underline underline-offset-4 transition-colors hover:text-accent"
+                        >
+                            aviso de privacidad
+                        </Link>
+                        .
+                    </p>
 
                     <div aria-live="polite">
                         {feedback && (

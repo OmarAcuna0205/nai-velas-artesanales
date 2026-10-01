@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "motion/react";
 import {
     FacebookLogoIcon,
@@ -10,11 +11,11 @@ import { seasons } from "@/data/seasons";
 import { site } from "@/data/site";
 
 const navigationLinks = [
-    { label: "Inicio", href: "#inicio" },
-    { label: "Catálogo", href: "#catalogo" },
-    { label: "Destacados", href: "#destacados" },
-    { label: "Nosotros", href: "#nosotros" },
-    { label: "Contacto", href: "#contacto" },
+    { label: "Inicio", href: "/#inicio" },
+    { label: "Catálogo", href: "/#catalogo" },
+    { label: "Destacados", href: "/#destacados" },
+    { label: "Nosotros", href: "/#nosotros" },
+    { label: "Contacto", href: "/#contacto" },
 ];
 
 const socialLinks = [
@@ -111,7 +112,7 @@ export default function Footer() {
                                 {seasons.map((season) => (
                                     <li key={season.id}>
                                         <a
-                                            href={`#${season.id}`}
+                                            href={`/#${season.id}`}
                                             className="block whitespace-nowrap font-display text-sm text-bg transition-colors duration-300 hover:text-note focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-note"
                                         >
                                             {season.name}
@@ -213,7 +214,13 @@ export default function Footer() {
                 >
                     <p>
                         © {new Date().getFullYear()} Naí Velas Artesanales.
-                        Todos los derechos reservados.
+                        Todos los derechos reservados.{" "}
+                        <Link
+                            href="/aviso-de-privacidad"
+                            className="underline decoration-border underline-offset-4 transition-colors duration-300 hover:text-note hover:decoration-note"
+                        >
+                            Aviso de privacidad
+                        </Link>
                     </p>
                     <p>
                         Diseño web por{" "}
