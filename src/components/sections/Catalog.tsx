@@ -234,7 +234,7 @@ function ProductCarousel({
                 <motion.ul
                     animate={{ x: `-${safeIndex * (100 / perView)}%` }}
                     transition={{ duration: 0.5, ease: "easeInOut" }}
-                    className="flex"
+                    className={`flex ${isNew ? "flex-col gap-10 md:flex-row md:gap-0" : ""}`}
                 >
                     {products.map((product) => (
                         <ProductCard
@@ -246,7 +246,9 @@ function ProductCarousel({
                 </motion.ul>
             </div>
 
-            <div className="mt-6 flex items-center justify-center gap-2">
+            <div
+                className={`mt-6 items-center justify-center gap-2 ${isNew ? "hidden md:flex" : "flex"}`}
+            >
                 <button
                     onClick={() => setIndex(safeIndex - 1)}
                     disabled={!(safeIndex > 0)}
