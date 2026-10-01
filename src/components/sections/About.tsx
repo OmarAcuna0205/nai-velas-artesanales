@@ -143,7 +143,7 @@ export default function About() {
                     >
                         <figure className="w-72 bg-surface p-3 shadow-[0_12px_32px_rgba(43,42,38,0.22)] lg:w-80">
                             <img
-                                src="/nosotros.png"
+                                src="/nosotros.webp"
                                 alt="Vela artesanal con forma de astronauta, encendida"
                                 className="aspect-4/5 w-full object-cover"
                             />

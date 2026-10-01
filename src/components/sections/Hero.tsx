@@ -2,11 +2,14 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
-import heroImage from "../../../public/hero.png";
-import heroMobileImage from "../../../public/hero-movil.png";
+import heroImage from "../../../public/hero.webp";
+import heroMobileImage from "../../../public/hero-movil.webp";
 import { contactLink } from "@/lib/whatsapp";
+import { useLoader } from "@/context/LoaderContext";
 
 export default function Hero() {
+    const { ready } = useLoader();
+
     return (
         <section
             id="inicio"
@@ -14,7 +17,7 @@ export default function Hero() {
         >
             <motion.div
                 initial={{ opacity: 0, scale: 1.05 }}
-                animate={{ opacity: 1, scale: 1 }}
+                animate={ready ? { opacity: 1, scale: 1 } : undefined}
                 transition={{ duration: 2.5, ease: [0.25, 1, 0.35, 1] }}
                 className="relative h-110 w-full overflow-hidden will-change-transform lg:absolute lg:inset-0 lg:h-auto lg:min-h-0"
             >
@@ -46,7 +49,7 @@ export default function Hero() {
             <div className="relative z-10 bg-bg lg:absolute lg:inset-0 lg:bg-transparent">
                 <motion.div
                     initial={{ opacity: 0, y: 25 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    animate={ready ? { opacity: 1, y: 0 } : undefined}
                     transition={{
                         duration: 1.5,
                         delay: 0.75,

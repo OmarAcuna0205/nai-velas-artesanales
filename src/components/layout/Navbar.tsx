@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import { ListIcon, XIcon, ShoppingCartIcon } from "@phosphor-icons/react";
 import { useCart } from "@/context/CartContext";
+import { useLoader } from "@/context/LoaderContext";
 import Drawer from "@/components/cart/Drawer";
 
 const links = [
@@ -17,6 +18,7 @@ const links = [
 
 export default function Navbar() {
     const { count, cartOpen, openCart, closeCart } = useCart();
+    const { ready } = useLoader();
     const [menuOpen, setMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
 
@@ -63,7 +65,7 @@ export default function Navbar() {
                     <motion.button
                         onClick={openMenu}
                         initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
+                        animate={ready ? { opacity: 1 } : undefined}
                         transition={{
                             duration: 1.5,
                         }}
@@ -74,7 +76,7 @@ export default function Navbar() {
 
                     <motion.ul
                         initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
+                        animate={ready ? { opacity: 1 } : undefined}
                         transition={{
                             duration: 1.5,
                             ease: "easeInOut",
@@ -97,7 +99,7 @@ export default function Navbar() {
                 <motion.div
                     className="flex justify-center"
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                    animate={ready ? { opacity: 1 } : undefined}
                     transition={{
                         duration: 1.5,
                     }}
@@ -106,7 +108,7 @@ export default function Navbar() {
                         <Image
                             className={`transition-all duration-300 hover:-translate-y-1 ${scrolled ? "md:w-24" : ""
                                 }`}
-                            src="/logo.png"
+                            src="/logo.webp"
                             alt="Nai — Velas artesanales"
                             width={140}
                             height={68}
@@ -119,7 +121,7 @@ export default function Navbar() {
                     <motion.button
                         onClick={showCart}
                         initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
+                        animate={ready ? { opacity: 1 } : undefined}
                         transition={{
                             duration: 1.5,
                         }}

@@ -2,9 +2,10 @@
 
 import Image, { type StaticImageData } from "next/image";
 import { motion } from "motion/react";
-import featured1 from "../../../public/featured1.png";
-import featured2 from "../../../public/featured2.png";
-import featured3 from "../../../public/featured3.png";
+import featured1 from "../../../public/destacado1.webp";
+import featured2 from "../../../public/destacado2.webp";
+import featured3 from "../../../public/destacado3.webp";
+import featured4 from "../../../public/destacado4.webp";
 
 type Item = {
     image: StaticImageData;
@@ -19,33 +20,39 @@ type Item = {
 const items: Item[] = [
     {
         image: featured1,
-        alt: "Velas de cera escamada en forma de flor con vela cónica",
-        eyebrow: "Cera Escamada",
-        title: "Arte hecho luz",
-        description:
-            "En la tradición mexicana, las velas de cera escamada iluminan los momentos más sagrados de la vida.",
+        alt: "Velas de otoño con calabazas y aromas Pumpkin spice latte, Vainilla y Manzana",
+        eyebrow: "",
+        title: "Otoño",
+        description: "Manzana, calabaza y café para tardes cálidas.",
         cta: "Ver en catálogo",
-        href: "#otono",
+        href: "#nuevo",
     },
     {
         image: featured2,
-        alt: "Velas Aura y Verano en recipientes de concreto gris y negro",
-        eyebrow: "Aura y Verano",
-        title: "Elegante y Sobrio",
-        description:
-            " Aura: Un refugio de misterio y calma. Verano: La frescura de la temporada en una versión sobria.",
+        alt: "Colección de verano: frappés, latas de citronela y room sprays",
+        eyebrow: "",
+        title: "Verano",
+        description: "Aromas frescos y frutales para días de calor.",
         cta: "Ver en catálogo",
         href: "#verano",
     },
     {
         image: featured3,
-        alt: "Velas de cera con forma de suculenta en cajas individuales",
-        eyebrow: "Colección de verano",
-        title: "Rico y Fresco",
-        description:
-            "Aún no tienes plan de a donde ir en este verano, pero si quieres que tu casa huela deli... Tenemos varias opciones para ti!",
+        alt: "Colección de primavera: bouquet de girasoles y cactus en vaso",
+        eyebrow: "",
+        title: "Primavera",
+        description: "Flores y suculentas con colores de primavera.",
         cta: "Ver en catálogo",
-        href: "#verano",
+        href: "#primavera",
+    },
+    {
+        image: featured4,
+        alt: "Colección de invierno: velas navideñas con pinos y regalos de cera",
+        eyebrow: "",
+        title: "Invierno",
+        description: "Pino, frutos rojos y canela para tus fiestas.",
+        cta: "Ver en catálogo",
+        href: "#invierno",
     },
 ];
 
@@ -71,7 +78,7 @@ export default function Featured() {
                     Destacados
                 </motion.h2>
 
-                <ul className="mt-12 grid gap-10 md:grid-cols-3 md:gap-8 lg:mt-16">
+                <ul className="mt-12 grid gap-10 md:grid-cols-2 md:gap-8 lg:mt-16 lg:grid-cols-4">
                     {items.map((item, index) => (
                         <motion.li
                             key={item.title}
@@ -94,21 +101,28 @@ export default function Featured() {
                             </div>
 
                             <div className="relative z-10 -mt-14 mx-5 bg-surface px-6 py-7 text-center transition-transform duration-500 ease-out group-hover:-translate-y-2">
-                                <p className="font-display text-xs font-semibold uppercase tracking-wider text-brand">
-                                    {item.eyebrow}
-                                </p>
+                                {item.eyebrow && (
+                                    <p className="mb-3 font-display text-xs font-semibold uppercase tracking-wider text-brand">
+                                        {item.eyebrow}
+                                    </p>
+                                )}
 
-                                <h3 className="mt-3 font-display text-xl leading-snug text-ink">
+                                <h3 className="font-display text-xl font-semibold leading-snug text-brand">
                                     {item.title}
                                 </h3>
 
-                                <p className="mt-3 font-body text-sm leading-relaxed text-muted">
-                                    {item.description}
-                                </p>
+                                {item.description && (
+                                    <p
+                                        title={item.description}
+                                        className="mt-3 line-clamp-3 font-body text-base leading-relaxed text-muted md:line-clamp-2 md:text-sm"
+                                    >
+                                        {item.description}
+                                    </p>
+                                )}
 
                                 <a
                                     href={item.href}
-                                    className="mt-5 inline-block border-b border-ink/30 pb-1 text-sm text-ink transition-colors hover:border-accent hover:text-accent"
+                                    className="mt-5 inline-block border-b border-accent pb-1 text-sm text-accent transition-colors hover:border-accent hover:text-accent md:border-ink/30 md:text-ink"
                                 >
                                     {item.cta}
                                 </a>
