@@ -344,7 +344,7 @@ export default function Catalog() {
                                     },
                                 },
                             }}
-                            className="shrink-0 rounded-full border border-border px-5 py-2 font-display text-xs uppercase tracking-widest text-ink transition-colors hover:border-brand hover:text-brand"
+                            className="shrink-0 rounded-full border border-border px-7 py-2 md:px-5 font-display text-xs uppercase tracking-widest text-ink transition-colors hover:border-brand hover:text-brand"
                         >
                             {season.name}
                         </motion.a>
